@@ -1,6 +1,6 @@
 'use strict';
 
-const UsersController = require('../../controllers/users');
+const UsersController = require('../../controllers/game');
 const validator = require('validator');
 const errs = require('restify-errors');
 

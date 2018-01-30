@@ -1,15 +1,14 @@
 'use strict';
 
-const UserModel = require('../models/user');
-const sha512 = require('js-sha512').sha512;
+const GameModel = require('../models/game');
 
-class User {
+class Game {
     constructor (user) {
         this.user = user;
     }
 
-    static async create (name, email, password) {
-        return new User(await UserModel.new(name, email, sha512(password)));
+    static async create (ownerId, ) {
+        return new Game(await GameModel.new(name, email, sha512(password)));
     }
 
     toString () {
