@@ -1,0 +1,22 @@
+{
+  "name": "battleship-server",
+  "version": "1.0.0",
+  "description": "Server to play the popular game battelship-server",
+  "main": "bin/www",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "battleship"
+  ],
+  "author": "Adrian Polo (apoloa)",
+  "license": "ISC",
+  "dependencies": {
+    "js-sha512": "^0.7.1",
+    "mongoose": "^5.0.2",
+    "restify": "^6.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0"
+  }
+}
