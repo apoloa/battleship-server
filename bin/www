@@ -1,0 +1,48 @@
+'use strict';
+
+const cluster = require('cluster');
+const os = require('os');
+
+const restApp = require('../server/rest');
+const config = require('../config/config');
+
+/**
+ * Function that create a server
+ */
+function createServer () {
+    restApp.listen(config.apiPort, function () {
+        console.log(`${restApp.name} listenting at ${restApp.url}`);
+    });
+}
+
+if (config.cluster) {
+    if (cluster.isMaster) {
+        cluster.on('listening', function (worker, address) {
+            console.log(`Worker ${ worker.id} con pid ${worker.process.pid} is now connected to port ${address.port}`);
+        });
+
+        cluster.on('exit', function (worker, code, signal) {
+            console.log(`Worker  ${worker.process.pid} died with code: ${code}, and signal: ${signal}`);
+            console.log('Starting a new worker');
+            cluster.fork();
+        });
+
+        cluster.on('disconnect', function (worker) {
+            console.log(`The worker # ${worker.id} has disconnected`);
+        });
+
+        const numCPUs = os.cpus().length;
+
+        logger.info(`Starting cluster for ${numCPUs} cpus...`);
+
+        // Fork workers.
+        for (let i = 0; i < numCPUs; i++) {
+            cluster.fork();
+        }
+    } else {
+        // Finish control cluster
+        createServer();
+    }
+} else {
+    createServer();
+}
