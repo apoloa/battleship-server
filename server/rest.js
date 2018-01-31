@@ -6,6 +6,8 @@ const SocketIo = require('socket.io');
 const testRoute = require('../routes/test');
 const userRoute = require('../routes/v1/users');
 
+const socketImp = require('../routes/socket');
+
 const server = restify.createServer({
     name: 'BattleshipServer'
 });
@@ -21,13 +23,7 @@ server.on('uncaughtException', function (req, res, route, err) {
     console.log(message);
 });
 
-io.on('connection', function (socket) {
-    console.log('a user connected');
-
-    socket.on('login', function (user) {
-        console.log('Logged User', user);
-    });
-});
+io.on('connection', socketImp);
 
 server.get('/test', testRoute);
 server.post('/test', testRoute);
