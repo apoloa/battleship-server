@@ -4,7 +4,8 @@
   "description": "Server to play the popular game battelship-server",
   "main": "bin/www",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node bin/www"
   },
   "keywords": [
     "battleship"
